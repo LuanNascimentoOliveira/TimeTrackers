@@ -1,0 +1,20 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.4"
+services:
+  app:
+    build:
+      context: "C:\\Users\\luann\\Documents\\Project Software\\TimeTracker"
+      dockerfile: "app/Dockerfile"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/app.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "app:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\luann\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\luann\\Documents\\Project Software\\TimeTracker\\app:/app:rw"
+    - "C:\\Users\\luann\\Documents\\Project Software\\TimeTracker:/src:rw"
+    working_dir: "/app"

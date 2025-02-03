@@ -1,0 +1,53 @@
+version: '3.4'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: TimeTracker
+      MYSQL_USER: regular_user
+      MYSQL_PASSWORD: regular_password
+    ports:
+      - "3306:3306"  # Porta padrão do MySQL
+    volumes:
+      - db_data:/var/lib/mysql  # Volume para persistência de dados do MySQL
+      - ./TimeTrackerBack/DB:/docker-entrypoint-initdb.d  # Inicializar banco de dados com scripts
+    networks:
+      - app-network  # Adiciona o MySQL à rede 'app-network' mesma rede que a app
+
+  app:
+    build:
+      context: ./TimeTrackerBack  # Caminho relativo para a API .NET
+      dockerfile: app/Dockerfile  # Caminho do Dockerfile para o app
+    container_name: dotnet-api
+    ports:
+      - "57420:8080"  # Porta do host mapeada para a porta 8080 no container
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development  # Define o ambiente de desenvolvimento
+      - ConnectionStrings__TimeTracker=Server=mysql-db;Database=TimeTracker;User=regular_user;Password=regular_password;
+    networks:
+      - app-network  # Define a rede onde os containers irão se comunicar
+    depends_on:
+      - mysql  # Define que o serviço 'app' depende do 'mysql'
+
+  frontend:
+      build:
+        context: ./TimeTrackerFront
+        dockerfile: app/Dockerfile
+      container_name: react-frontend
+      ports:
+        - "3000:80"  # Porta do frontend para o host
+      depends_on:
+        - app
+      networks:
+        - app-network
+
+networks:
+  app-network:
+    driver: bridge  # Rede bridge para comunicação entre containers
+
+volumes:
+  db_data:
+    driver: local  # Volume local para persistência de dados do MySQL

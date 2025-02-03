@@ -1,0 +1,38 @@
+name: dockercompose11195278013946303383
+services:
+  app:
+    build:
+      context: C:\Users\luann\Documents\Project Software\TimeTracker
+      dockerfile: app/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+    image: app
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 8080
+        published: "32772"
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        published: "32772"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\luann\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\luann\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose11195278013946303383_default

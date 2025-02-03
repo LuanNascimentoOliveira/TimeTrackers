@@ -1,0 +1,68 @@
+name: dockercompose11195278013946303383
+services:
+  app:
+    build:
+      context: C:\Users\luann\Documents\Project Software\TimeTracker
+      dockerfile: app/Dockerfile
+    depends_on:
+      mysql:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_HTTPS_PORTS: "8081"
+      ConnectionStrings__DefaultConnection: Server=mysql-db;Database=TimeTracker;User=root;Password=root;
+    image: app
+    networks:
+      app-network: null
+    ports:
+      - mode: ingress
+        target: 8080
+        protocol: tcp
+      - mode: ingress
+        target: 8081
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\luann\AppData\Roaming/Microsoft/UserSecrets
+        target: /home/app/.microsoft/usersecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\luann\AppData\Roaming/ASP.NET/Https
+        target: /home/app/.aspnet/https
+        read_only: true
+        bind:
+          create_host_path: true
+  mysql:
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: TimeTracker
+      MYSQL_PASSWORD: regular_password
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: regular_user
+    image: mysql:8.0
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 3306
+        published: "3306"
+        protocol: tcp
+    volumes:
+      - type: volume
+        source: db_data
+        target: /var/lib/mysql
+        volume: {}
+networks:
+  app-network:
+    name: dockercompose11195278013946303383_app-network
+    driver: bridge
+  default:
+    name: dockercompose11195278013946303383_default
+volumes:
+  db_data:
+    name: dockercompose11195278013946303383_db_data
+    driver: local

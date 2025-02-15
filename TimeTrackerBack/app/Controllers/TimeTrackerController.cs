@@ -1,5 +1,7 @@
-﻿using app.Models;
+﻿using app.Models.DTO;
+using app.Models.Entities;
 using app.Services.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -7,73 +9,18 @@ namespace app.Controllers;
 
 [ApiController]
 [Route("[controller]/v1/")]
-public class TimeTrackerController(
-    ITimeTrackerService service
-    ) : ControllerBase
+public class TimeTrackerController(IMapper iMapper, ITimeTrackerService service) : ControllerBase
 {
 
-
-    [HttpPost("timerbanks")]
-    public async Task<ActionResult> CreateTimebanck(TimeBankModel timeBankModel)
+    [HttpPost("time-entry")]
+    public async Task<IActionResult> CreateTimebanck([FromBody] TimeBankDto timeBankDto)
     {
-        try
-        {
-            var postResult = await service.CreateTimeTracker(timeBankModel);
+            var timeBank = iMapper.Map<TimeBank>(timeBankDto);
 
-            if (!postResult)
-                return BadRequest("Time already registered");
+            var postResult = await service.CreateTimeTracker(timeBank);
 
-            return Ok();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-       
+            var response = iMapper.Map<TimeBankDto>(postResult);
+
+            return new ObjectResult(response) { StatusCode = StatusCodes.Status201Created};      
     }
-
-    [HttpGet("timerbanks/dates")]
-    public async Task<ActionResult> GetTimebanks(DateTime date)
-    {
-        try
-        {
-            var getResult = await service.GetTimeTrackersByDate(date);
-            
-            if (getResult is null)
-            {
-                return NotFound("No time trackers found");
-            }
-            
-            return Ok(getResult);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
-
-    [HttpGet("timerbanks/months")]
-    public async Task<ActionResult> GetTimeTrackerByMonth(DateTime month)
-    {
-        try
-        {
-            var getResult = await service.GetTimeTrackersByMonth(month);
-
-            if (getResult is null)
-            {
-                return NotFound("No time trackers by month found");
-            }
-
-            return Ok(getResult);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
-    }
-
 }

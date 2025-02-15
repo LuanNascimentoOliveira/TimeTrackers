@@ -1,6 +1,5 @@
-using app.Adapters;
-using app.Adapters.Interfaces;
 using app.Infrastructure;
+using app.Mapper;
 using app.Repository;
 using app.Repository.Interfaces;
 using app.Services;
@@ -31,13 +30,16 @@ builder.Services.AddDbContextPool<TimeTrackerContext>(options =>
 
 builder.Services.AddScoped<ITimeTrackerService, TimeTrackerService>();
 builder.Services.AddScoped<ITimeTrackerRepo, TimeTrackerRepo>();
-builder.Services.AddScoped<IBaseAdapter, BaseAdapter>();
 builder.Services.AddCors(options =>
 {
    options.AddPolicy("AllowSpecificOrigin",builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
+
 var app = builder.Build();
+
+app.UseMiddleware<ErrorHandlingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

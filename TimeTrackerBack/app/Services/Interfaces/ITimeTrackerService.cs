@@ -1,11 +1,10 @@
 ﻿using app.Models;
+using app.Models.DTO;
+using app.Models.Entities;
 
 namespace app. Services. Interfaces;
 
 public interface ITimeTrackerService
 {
-    Task<bool> CreateTimeTracker(TimeBankModel timeBankModel);
-
-    Task<IEnumerable<TimeBankModel>> GetTimeTrackersByDate(DateTime date);
-    Task<IEnumerable<TimeBankModel>> GetTimeTrackersByMonth(DateTime month);
+    Task<TimeBank> CreateTimeTracker(TimeBank timeBank);
 }

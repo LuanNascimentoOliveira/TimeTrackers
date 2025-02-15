@@ -10,6 +10,7 @@ on:
     branches: [ "Dev" ]
 
 jobs:
+  
   build:
 
     runs-on: ubuntu-latest
@@ -26,3 +27,14 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+  deployDev:
+    name: Deploy to dev
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: Development
+      url: 'http://dev.myapp.com'
+    steps:
+      - name: Deploy
+        run: echo I am deploying! 

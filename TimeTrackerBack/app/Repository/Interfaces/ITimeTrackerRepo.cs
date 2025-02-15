@@ -1,11 +1,9 @@
-﻿using app.Entities;
-using app.Models;
+﻿using app.Models;
+using app.Models.Entities;
 
 namespace app.Repository.Interfaces;
 
 public interface ITimeTrackerRepo
 {
-    Task<bool> AddTimeTracker(TimeBank timeBank);
-    Task<IEnumerable<TimeBank>> SelectTimeTrackingByDate(DateTime date);
-    Task<IEnumerable<TimeBank>> GetTimeTrackingByMonth(DateTime month);
+    Task<TimeBank> AddTimeTracker(TimeBank timeBank);
 }

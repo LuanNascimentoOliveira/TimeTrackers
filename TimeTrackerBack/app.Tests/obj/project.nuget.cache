@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "9/byMKbhbRA=",
+  "dgSpecHash": "AGnTy4xG3S4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\luann\\Documents\\Project Software\\TimeTracker\\TimeTrackerBack\\app.Tests\\app.Tests.csproj",
+  "projectFilePath": "C:\\Users\\luann\\Documents\\Project Software\\TimeTrackers\\TimeTrackerBack\\app.Tests\\app.Tests.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\luann\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\luann\\.nuget\\packages\\castle.core\\5.1.1\\castle.core.5.1.1.nupkg.sha512",
     "C:\\Users\\luann\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
     "C:\\Users\\luann\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",

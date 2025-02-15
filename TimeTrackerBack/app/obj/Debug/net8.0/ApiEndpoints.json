@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "app.Controllers.TimeTrackerController",
+    "Method": "CreateTimebanck",
+    "RelativePath": "TimeTracker/v1/time-entry",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "timeBankDto",
+        "Type": "app.Models.DTO.TimeBankDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

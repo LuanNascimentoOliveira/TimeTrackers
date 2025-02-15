@@ -1,4 +1,3 @@
-using app.Entities;
 using app.Infrastructure;
 using app.Repository;
 using app.Tests.Test.Mocks;

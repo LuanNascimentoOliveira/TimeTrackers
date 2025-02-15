@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "PN6ORa/9Yws=",
+  "dgSpecHash": "T3tFw9wj4jw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\luann\\Documents\\Project Software\\TimeTracker\\TimeTrackerBack\\app\\app.csproj",
+  "projectFilePath": "C:\\Users\\luann\\Documents\\Project Software\\TimeTrackers\\TimeTrackerBack\\app\\app.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\luann\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\luann\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
     "C:\\Users\\luann\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\luann\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.2.0\\microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",

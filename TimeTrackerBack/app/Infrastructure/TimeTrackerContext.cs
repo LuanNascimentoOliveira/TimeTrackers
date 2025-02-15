@@ -1,4 +1,4 @@
-﻿using app.Entities;
+﻿using app.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace app.Infrastructure;

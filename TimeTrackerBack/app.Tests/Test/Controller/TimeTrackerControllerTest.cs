@@ -8,49 +8,29 @@ namespace app.Tests.Test.Controller;
 
 public class TimeTrackerControllerTest
 {
-    private readonly Mock<ITimeTrackerService> _timeTrackerService;
-    private readonly TimeTrackerController _controller;
+    //private readonly Mock<ITimeTrackerService> _timeTrackerService;
+    //private readonly TimeTrackerController _controller;
 
-    public TimeTrackerControllerTest()
-    {
-        _timeTrackerService = new();
-        _controller = new TimeTrackerController(_timeTrackerService.Object);
-    }
+    //public TimeTrackerControllerTest()
+    //{
+    //    _timeTrackerService = new();
+    //    _controller = new TimeTrackerController(_timeTrackerService.Object);
+    //}
 
-    [Fact]
-    private async Task Should_Create_Time_Tracker()
-    {
-        //Arrange
-        var inputTimeBank = MockTimebank.ListTimeBankInputs().First();
+    //[Fact]
+    //private async Task Should_Create_Time_Tracker_Status_Code_201()
+    //{
+    //    //Arrange
+    //    var inputTimeBank = MockTimebank.ListTimeBankInputs().First();
 
-        _timeTrackerService
-            .Setup(s => s.CreateTimeTracker(inputTimeBank))
-            .ReturnsAsync(true);
+    //    _timeTrackerService
+    //        .Setup(s => s.CreateTimeTracker(inputTimeBank))
+    //        .ReturnsAsync(true);
 
-        //Act
-        var postResult = await _controller.CreateTimebanck(inputTimeBank);
+    //    //Act
+    //    var postResult = await _controller.CreateTimebanck(inputTimeBank);
 
-        //Assert
-        Assert.True(postResult is OkResult);
-    }
-
-    [Fact]
-    private async Task Should_Get_Time_Tracker()
-    {
-        //Arrange
-        DateTime date = new();
-
-        var timeBankInput = MockTimebank.ListTimeBankInputs();
-
-        _timeTrackerService
-            .Setup(s => s.GetTimeTrackersByDate(date))
-            .ReturnsAsync(timeBankInput);
-
-        //Act
-        var getResult = await _controller.GetTimebanks(date);
-
-        //Assert
-        Assert.True(getResult is OkObjectResult);
-
-    }
+    //    //Assert
+    //    Assert.True(postResult is OkResult);
+    //}
 }

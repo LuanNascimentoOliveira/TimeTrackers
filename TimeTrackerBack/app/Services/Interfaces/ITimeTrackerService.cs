@@ -1,10 +1,8 @@
-﻿using app.Models;
-using app.Models.DTO;
-using app.Models.Entities;
+﻿using app.Models.DTO;
 
 namespace app. Services. Interfaces;
 
 public interface ITimeTrackerService
 {
-    Task<TimeBank> CreateTimeTracker(TimeBank timeBank);
+    Task<TimeBankDto> CreateTimeTracker(TimeBankDto timeBankDto);
 }

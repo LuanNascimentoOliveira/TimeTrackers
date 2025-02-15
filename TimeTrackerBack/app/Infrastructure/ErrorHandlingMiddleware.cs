@@ -33,7 +33,7 @@ namespace app.Infrastructure
 
                 case InvalidOperationException:
                     response.StatusCode = (int)HttpStatusCode.Conflict;
-                    errorResponse = new { message = "Time entry already exists."};
+                    errorResponse = new { message = "Time entry already exists"};
                     break;
 
                 default:

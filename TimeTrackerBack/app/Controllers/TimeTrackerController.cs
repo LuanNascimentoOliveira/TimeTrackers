@@ -10,13 +10,13 @@ public class TimeTrackerController(ITimeTrackerService service) : ControllerBase
 {
  
     [HttpPost("time-entry")]
-    public async Task<IActionResult> CreateTimebanck([FromBody] TimeBankDto timeBankDto)
+    public async Task<IActionResult> CreateTimebank([FromBody] TimeBankDto timeBankDto)
     {
         try
         {
             var postResult = await service.CreateTimeTracker(timeBankDto);
 
-            return CreatedAtAction(nameof(CreateTimebanck), postResult);
+            return CreatedAtAction(nameof(CreateTimebank), postResult);
         }
         catch (ArgumentNullException ex)
         {

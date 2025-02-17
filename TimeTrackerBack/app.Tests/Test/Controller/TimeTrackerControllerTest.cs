@@ -1,14 +1,11 @@
 ﻿using app.Controllers;
+using app.Models.DTO;
 using app.Services.Interfaces;
 using app.Tests.Test.Mocks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using Moq;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using System.Net;
 
 namespace app.Tests.Test.Controller;
 
@@ -16,14 +13,12 @@ namespace app.Tests.Test.Controller;
 public class TimeTrackerControllerTest
 {
     private Mock<ITimeTrackerService> _timeTrackerService;
-    private Mock<IMapper> _mapperMock;
     private TimeTrackerController _controller;
 
     [SetUp]
     public void Setup()
     {
         _timeTrackerService = new();
-        _mapperMock = new();
         _controller = new TimeTrackerController(_timeTrackerService.Object);
     }
 
@@ -38,7 +33,7 @@ public class TimeTrackerControllerTest
             .ReturnsAsync(inputTimeBank);
 
         //Act
-        var postResult = await _controller.CreateTimebanck(inputTimeBank) as CreatedAtActionResult;
+        var postResult = await _controller.CreateTimebank(inputTimeBank) as CreatedAtActionResult;
 
         //Assert
         ClassicAssert.IsNotNull(postResult);
@@ -51,20 +46,19 @@ public class TimeTrackerControllerTest
             //Arrange
             var inputTimeBank = MockTimebank.ListTimeBanks().First();
 
-            var expectedMessage = "Clock-in data is missing.";
+            var expectedMessage = "data is missing.";
 
-        _timeTrackerService
+            _timeTrackerService
                 .Setup(s => s.CreateTimeTracker(inputTimeBank))
-                .ThrowsAsync(new ArgumentNullException("Clock-in data is missing."));
+                .ThrowsAsync(new ArgumentNullException(nameof(inputTimeBank.StartTime), message: expectedMessage));
 
             //Act
-            var result = await _controller.CreateTimebanck(inputTimeBank) as BadRequestObjectResult;
+            var result = await _controller.CreateTimebank(inputTimeBank) as BadRequestObjectResult;
 
             //Assert
             ClassicAssert.IsNotNull(result);
             ClassicAssert.AreEqual(400, result.StatusCode);
-            ClassicAssert.True(result.Value.ToString().Contains(expectedMessage));
-            ClassicAssert.AreEqual("Value cannot be null. (Parameter 'Clock-in data is missing.')", result.Value);
+            ClassicAssert.AreEqual($"{expectedMessage} (Parameter '{nameof(inputTimeBank.StartTime)}')", result.Value);
         }
 
         [Test]
@@ -77,14 +71,14 @@ public class TimeTrackerControllerTest
 
             _timeTrackerService
                     .Setup(s => s.CreateTimeTracker(inputTimeBank))
-                    .ThrowsAsync(new InvalidOperationException("A time entry already exists for this date."));
+                    .ThrowsAsync(new InvalidOperationException(expectedMessage));
 
             //Act
-            var result = await _controller.CreateTimebanck(inputTimeBank) as ConflictObjectResult;
+            var result = await _controller.CreateTimebank(inputTimeBank) as ConflictObjectResult;
 
             //Assert
             ClassicAssert.IsNotNull(result);
             ClassicAssert.AreEqual(409, result.StatusCode);
-            ClassicAssert.True(result.Value.ToString().Contains(expectedMessage));
-        }
+            ClassicAssert.AreEqual(expectedMessage, result.Value);
+    }
 }

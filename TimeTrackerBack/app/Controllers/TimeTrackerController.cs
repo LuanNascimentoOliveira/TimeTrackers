@@ -11,9 +11,20 @@ public class TimeTrackerController(ITimeTrackerService service) : ControllerBase
  
     [HttpPost("time-entry")]
     public async Task<IActionResult> CreateTimebanck([FromBody] TimeBankDto timeBankDto)
-    {    
-        var postResult = await service.CreateTimeTracker(timeBankDto);
+    {
+        try
+        {
+            var postResult = await service.CreateTimeTracker(timeBankDto);
 
-        return new ObjectResult(postResult) { StatusCode = StatusCodes.Status201Created};
+            return CreatedAtAction(nameof(CreateTimebanck), postResult);
+        }
+        catch (ArgumentNullException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (InvalidOperationException ex) 
+        {
+            return Conflict(ex.Message);
+        }
     }
 }

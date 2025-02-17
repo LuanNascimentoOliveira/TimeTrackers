@@ -21,23 +21,20 @@ namespace app.Infrastructure
         {
             context.Response.ContentType = "application/json";
 
-            var response = context.Response;
+            //var response = context.Response;
             var errorResponse = new { message = exception.Message };
 
             switch (exception)
             {
                 case ArgumentNullException:
-                    response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    errorResponse = new { message = "Invalid request data." };
+                    errorResponse = new { message = "Clock-in data is missing." };
                     break;
 
                 case InvalidOperationException:
-                    response.StatusCode = (int)HttpStatusCode.Conflict;
                     errorResponse = new { message = "Time entry already exists"};
                     break;
 
                 default:
-                    response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     errorResponse = new { message = "An unexpected error occurred." };
                     break;
             }

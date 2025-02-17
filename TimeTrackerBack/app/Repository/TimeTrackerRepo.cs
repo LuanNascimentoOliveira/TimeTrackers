@@ -10,13 +10,11 @@ public class TimeTrackerRepo(
     ): ITimeTrackerRepo
 {
 
-    public async Task<TimeBank?> AddTimeTracker(TimeBank timeBank)
-    {
-        var exists = await context.TimeBanks.AnyAsync(t => t.TimeData.Date == timeBank.TimeData.Date);
-        
-        if (exists)
-            return null;
-        
+    public async Task<bool> TimeEntryExistsAsync(TimeBank timeBank)
+        => await context.TimeBanks.AnyAsync(t => t.TimeData.Date == timeBank.TimeData.Date);
+
+    public async Task<TimeBank> AddTimeTracker(TimeBank timeBank)
+    {            
         await context.TimeBanks.AddAsync(timeBank);
         await context.SaveChangesAsync();
         

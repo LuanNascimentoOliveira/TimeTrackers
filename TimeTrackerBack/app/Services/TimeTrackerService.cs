@@ -8,20 +8,36 @@ namespace app.Services;
 
 public class TimeTrackerService(
     ITimeTrackerRepo repo,
-    IMapper iMapper
+    IMapper mapper
     ): ITimeTrackerService
 {
-    //TODO incluir no futuro badrequest, talves m[a formatacao.
     public async Task<TimeBankDto> CreateTimeTracker(TimeBankDto timeBankDto)
     {
-        var timeBank = iMapper.Map<TimeBank>(timeBankDto);
+        ValidateTimeBankDto(timeBankDto);
 
-        var addTime = await repo.AddTimeTracker(timeBank)
-            ?? throw new InvalidOperationException();
+        var timeBank = mapper.Map<TimeBank>(timeBankDto);        
 
-        var response = iMapper.Map<TimeBankDto>(addTime);
+        await TimeEntryExists(timeBank);
 
-        return response;
+        var addTime = await repo.AddTimeTracker(timeBank);
 
+        return mapper.Map<TimeBankDto>(addTime);
     }
+
+    private static void ValidateTimeBankDto(TimeBankDto timeBankDto)
+    {
+        if (string.IsNullOrEmpty(timeBankDto.Clockin))
+        {
+            throw new ArgumentNullException("Clock-in data is missing.");
+        }
+    }
+
+    private async Task TimeEntryExists(TimeBank timeBank)
+    {
+        var timeEntryExists = await repo.TimeEntryExistsAsync(timeBank);
+
+        if (timeEntryExists)
+            throw new InvalidOperationException("A time entry already exists for this date.");
+    }
+
 }

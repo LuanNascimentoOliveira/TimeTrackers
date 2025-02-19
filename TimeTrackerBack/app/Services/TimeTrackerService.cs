@@ -13,9 +13,11 @@ public class TimeTrackerService(
 {
     public async Task<TimeBankDto> CreateTimeTracker(TimeBankDto timeBankDto)
     {
-        await TimeEntryExists(ValidateTimeBankDto(timeBankDto));
+        var timeBank = ValidateTimeBankDto(timeBankDto);
 
-        var addTime = await repo.AddTimeTracker(ValidateTimeBankDto(timeBankDto));
+        await TimeEntryExists(timeBank);
+
+        var addTime = await repo.AddTimeTracker(timeBank);
 
         return mapper.Map<TimeBankDto>(addTime);
     }
@@ -23,7 +25,7 @@ public class TimeTrackerService(
     private TimeBank ValidateTimeBankDto(TimeBankDto timeBankDto)
     {
         if (string.IsNullOrEmpty(timeBankDto.StartTime))
-            throw new ArgumentNullException(nameof(timeBankDto.StartTime), message: "data is missing.");
+            throw new ArgumentNullException(nameof(timeBankDto.StartTime), "data is missing.");
 
         return mapper.Map<TimeBank>(timeBankDto);
     }

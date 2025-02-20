@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "app",
-    "version": "1.0"
+    "title": "TimeTracker API",
+    "version": "v1"
   },
   "paths": {
     "/TimeTracker/v1/time-entry": {

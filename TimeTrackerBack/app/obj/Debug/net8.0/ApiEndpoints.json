@@ -1,7 +1,7 @@
 [
   {
     "ContainingType": "app.Controllers.TimeTrackerController",
-    "Method": "CreateTimebanck",
+    "Method": "CreateTimebank",
     "RelativePath": "TimeTracker/v1/time-entry",
     "HttpMethod": "POST",
     "IsController": true,

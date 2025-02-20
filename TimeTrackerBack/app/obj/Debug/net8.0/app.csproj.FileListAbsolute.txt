@@ -116,3 +116,11 @@ C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\obj\D
 C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\obj\Debug\net8.0\app.pdb
 C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\obj\Debug\net8.0\app.genruntimeconfig.cache
 C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\obj\Debug\net8.0\ref\app.dll
+C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\luann\Documents\Project Software\TimeTrackers\TimeTrackerBack\app\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
